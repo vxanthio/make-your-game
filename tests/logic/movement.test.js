@@ -5,3 +5,8 @@ test('returns true for an empty cell', () => {
   const result = isWalkable(grid, 0, 0);
   expect(result).toBe(true);
 });
+test('returns true for the exit cell', () => {
+  const grid = [['exit']];
+  const result = isWalkable(grid, 0, 0);
+  expect(result).toBe(true);
+});
