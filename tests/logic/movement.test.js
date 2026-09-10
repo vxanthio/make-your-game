@@ -30,3 +30,8 @@ test('returns false when the row is beyond the grid', () => {
   const result = isWalkable(grid, 5, 0);
   expect(result).toBe(false);
 });
+test('return false when the col is beyond the grid', () => {
+  const grid = [['empty']];
+  const result = isWalkable(grid, 0, 5);
+  expect(result).toBe(false);
+});
