@@ -25,3 +25,8 @@ test('return false for an empty cell out of bound', () => {
   const result = isWalkable(grid, -1, 0);
   expect(result).toBe(false);
 });
+test('returns false when the row is beyond the grid', () => {
+  const grid = [['empty']];
+  const result = isWalkable(grid, 5, 0);
+  expect(result).toBe(false);
+});
