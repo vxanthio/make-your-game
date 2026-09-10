@@ -1,5 +1,5 @@
 export function isWalkable(grid, row, col) {
-  if (row < 0 || col < 0 || row >= grid.length) {
+  if (row < 0 || col < 0 || row >= grid.length || col >= grid[row].length) {
     return false;
   }
   if (grid[row][col] === 'empty') {
