@@ -10,3 +10,8 @@ test('returns true for the exit cell', () => {
   const result = isWalkable(grid, 0, 0);
   expect(result).toBe(true);
 });
+test('return false for the wall cell', () => {
+  const grid = [['wall']];
+  const result = isWalkable(grid, 0, 0);
+  expect(result).toBe(false);
+});
