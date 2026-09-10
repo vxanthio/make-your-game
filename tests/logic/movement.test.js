@@ -20,3 +20,8 @@ test('return false for a soft cell', () => {
   const result = isWalkable(grid, 0, 0);
   expect(result).toBe(false);
 });
+test('return false for an empty cell out of bound', () => {
+  const grid = [['empty']];
+  const result = isWalkable(grid, -1, 0);
+  expect(result).toBe(false);
+});
