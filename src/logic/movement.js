@@ -1,4 +1,7 @@
 export function isWalkable(grid, row, col) {
+  if (row < 0 || col < 0) {
+    return false;
+  }
   if (grid[row][col] === 'empty') {
     return true;
   }
