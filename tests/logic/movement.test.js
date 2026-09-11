@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { isWalkable } from '../../src/logic/movement.js';
+import { isWalkable, moveEntity } from '../../src/logic/movement.js';
 test('returns true for an empty cell', () => {
   const grid = [['empty']];
   const result = isWalkable(grid, 0, 0);
@@ -34,4 +34,17 @@ test('return false when the col is beyond the grid', () => {
   const grid = [['empty']];
   const result = isWalkable(grid, 0, 5);
   expect(result).toBe(false);
+});
+test('increase x possition when entity goes right', () => {
+  const entity = {
+    x: 0,
+    y: 0,
+    speed: 0.15,
+  };
+  const dt = 20;
+  const direction = 'right';
+  const grid = [['empty', 'empty']];
+  moveEntity(entity, dt, direction, grid);
+  expect(entity.x).toBe(3);
+  expect(entity.y).toBe(0);
 });
