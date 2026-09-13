@@ -74,3 +74,16 @@ test('increase y possition when the entity goes down', () => {
   expect(entity.y).toBe(13);
   expect(entity.x).toBe(0);
 });
+test('decrease y possition when the entity goes up', () => {
+  const entity = {
+    x: 0,
+    y: 10,
+    speed: 0.15,
+  };
+  const dt = 20;
+  const direction = 'up';
+  const grid = [['empty', 'empty']];
+  moveEntity(entity, dt, direction, grid);
+  expect(entity.y).toBe(7);
+  expect(entity.x).toBe(0);
+});
