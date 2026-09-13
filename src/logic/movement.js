@@ -20,4 +20,7 @@ export function moveEntity(entity, dt, direction, grid) {
   if (direction === 'right') {
     entity.x += distance;
   }
+  if (direction==='left') {
+    entity.x-=distance;
+  }
 }
