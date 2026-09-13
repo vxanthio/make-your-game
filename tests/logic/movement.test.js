@@ -48,3 +48,16 @@ test('increase x possition when entity goes right', () => {
   expect(entity.x).toBe(3);
   expect(entity.y).toBe(0);
 });
+test('decrease x possition when entity goes left',() =>{
+  const entity ={
+    x:10,
+    y:0,
+    speed:0.15,
+  };
+  const dt=20;
+  const direction='left';
+  const grid=[['empty','empty']];
+  moveEntity(entity,dt,direction,grid);
+  expect(entity.x).toBe(7);
+  expect(entity.y).toBe(0);
+});
