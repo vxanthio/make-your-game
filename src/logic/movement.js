@@ -15,3 +15,9 @@ export function isWalkable(grid, row, col) {
     return false;
   }
 }
+export function moveEntity(entity, dt, direction, grid) {
+  const distance = entity.speed * dt;
+  if (direction === 'right') {
+    entity.x += distance;
+  }
+}
