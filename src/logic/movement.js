@@ -26,4 +26,7 @@ export function moveEntity(entity, dt, direction, grid) {
   if (direction === 'down') {
     entity.y += distance;
   }
+  if (direction === 'up') {
+    entity.y -= distance;
+  }
 }
