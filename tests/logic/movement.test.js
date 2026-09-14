@@ -108,7 +108,7 @@ test('same total dt results in the same position', () => {
   }
   expect(entityA.x).toBe(entityB.x);
 });
-test('prevents movement into a wall', () => {
+test('prevents movement into a wall in the right side', () => {
   const entity = {
     x: 30,
     y: 0,
@@ -119,4 +119,16 @@ test('prevents movement into a wall', () => {
   const grid = [['empty', 'wall']];
   moveEntity(entity, dt, direction, grid);
   expect(entity.x).toBe(39);
+});
+test('prevents movement into a wall in the left side', () => {
+  const entity = {
+    x: 50,
+    y: 0,
+    speed: 0.15,
+  };
+  const dt = 80;
+  const direction = 'left';
+  const grid = [['wall', 'empty']];
+  moveEntity(entity, dt, direction, grid);
+  expect(entity.x).toBe(40);
 });
