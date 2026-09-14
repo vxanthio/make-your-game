@@ -87,3 +87,24 @@ test('decrease y possition when the entity goes up', () => {
   expect(entity.y).toBe(7);
   expect(entity.x).toBe(0);
 });
+test('same total dt results in the same position', () => {
+  const entityA = {
+    x: 0,
+    y: 0,
+    speed: 0.15,
+  };
+  const entityB = {
+    x: 0,
+    y: 0,
+    speed: 0.15,
+  };
+  const dtA = 40;
+  const dtB = 10;
+  const direction = 'right';
+  const grid = [['empty', 'empty']];
+  moveEntity(entityA, dtA, direction, grid);
+  for (let i = 0; i < 4; i++) {
+    moveEntity(entityB, dtB, direction, grid);
+  }
+  expect(entityA.x).toBe(entityB.x);
+});
