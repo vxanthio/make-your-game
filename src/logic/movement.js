@@ -1,3 +1,4 @@
+import { TILE_SIZE_PX } from '../constants.js';
 export function isWalkable(grid, row, col) {
   if (row < 0 || col < 0 || row >= grid.length || col >= grid[row].length) {
     return false;
@@ -18,7 +19,14 @@ export function isWalkable(grid, row, col) {
 export function moveEntity(entity, dt, direction, grid) {
   const distance = entity.speed * dt;
   if (direction === 'right') {
-    entity.x += distance;
+    const attemptedX = entity.x + distance;
+    const col = Math.floor(attemptedX / TILE_SIZE_PX);
+    const row = Math.floor(entity.y / TILE_SIZE_PX);
+    if (isWalkable(grid, row, col)) {
+      entity.x = attemptedX;
+    } else {
+      entity.x = col * TILE_SIZE_PX - 1;
+    }
   }
   if (direction === 'left') {
     entity.x -= distance;
