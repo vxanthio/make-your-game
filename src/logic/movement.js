@@ -29,7 +29,14 @@ export function moveEntity(entity, dt, direction, grid) {
     }
   }
   if (direction === 'left') {
-    entity.x -= distance;
+    const attemptedX = entity.x - distance;
+    const col = Math.floor(attemptedX / TILE_SIZE_PX);
+    const row = Math.floor(entity.y / TILE_SIZE_PX);
+    if (isWalkable(grid, row, col)) {
+      entity.x = attemptedX;
+    } else {
+      entity.x = (col + 1) * TILE_SIZE_PX;
+    }
   }
   if (direction === 'down') {
     entity.y += distance;
