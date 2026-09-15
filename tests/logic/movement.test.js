@@ -144,3 +144,15 @@ test('prevents movement into a wall below', () => {
   moveEntity(entity, dt, direction, grid);
   expect(entity.y).toBe(39);
 });
+test('prevents movement into an upward wall', () => {
+  const entity = {
+    x: 0,
+    y: 50,
+    speed: 0.15,
+  };
+  const dt = 80;
+  const direction = 'up';
+  const grid = [['wall'], ['empty']];
+  moveEntity(entity, dt, direction, grid);
+  expect(entity.y).toBe(40);
+});
