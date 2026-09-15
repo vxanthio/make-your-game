@@ -49,6 +49,13 @@ export function moveEntity(entity, dt, direction, grid) {
     }
   }
   if (direction === 'up') {
-    entity.y -= distance;
+    const attemptedY = entity.y - distance;
+    const row = Math.floor(attemptedY / TILE_SIZE_PX);
+    const col = Math.floor(entity.x / TILE_SIZE_PX);
+    if (isWalkable(grid, row, col)) {
+      entity.y = attemptedY;
+    } else {
+      entity.y = (row + 1) * TILE_SIZE_PX;
+    }
   }
 }
