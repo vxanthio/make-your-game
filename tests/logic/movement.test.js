@@ -1,37 +1,37 @@
 import { test, expect } from 'vitest';
 import { isWalkable, moveEntity } from '../../src/logic/movement.js';
 test('returns true for an empty cell', () => {
-  const grid = [['empty']];
+  const grid = [[{ type: 'empty' }]];
   const result = isWalkable(grid, 0, 0);
   expect(result).toBe(true);
 });
 test('returns true for the exit cell', () => {
-  const grid = [['exit']];
+  const grid = [[{ type: 'exit' }]];
   const result = isWalkable(grid, 0, 0);
   expect(result).toBe(true);
 });
 test('return false for a wall cell', () => {
-  const grid = [['wall']];
+  const grid = [[{ type: 'wall' }]];
   const result = isWalkable(grid, 0, 0);
   expect(result).toBe(false);
 });
 test('return false for a soft cell', () => {
-  const grid = [['soft']];
+  const grid = [[{ type: 'soft' }]];
   const result = isWalkable(grid, 0, 0);
   expect(result).toBe(false);
 });
 test('return false for an empty cell out of bound', () => {
-  const grid = [['empty']];
+  const grid = [[{ type: 'empty' }]];
   const result = isWalkable(grid, -1, 0);
   expect(result).toBe(false);
 });
 test('returns false when the row is beyond the grid', () => {
-  const grid = [['empty']];
+  const grid = [[{ type: 'empty' }]];
   const result = isWalkable(grid, 5, 0);
   expect(result).toBe(false);
 });
 test('return false when the col is beyond the grid', () => {
-  const grid = [['empty']];
+  const grid = [[{ type: 'empty' }]];
   const result = isWalkable(grid, 0, 5);
   expect(result).toBe(false);
 });
@@ -43,7 +43,7 @@ test('increase x possition when entity goes right', () => {
   };
   const dt = 20;
   const direction = 'right';
-  const grid = [['empty', 'empty']];
+  const grid = [[{ type: 'empty' }, { type: 'empty' }]];
   moveEntity(entity, dt, direction, grid);
   expect(entity.x).toBe(3);
   expect(entity.y).toBe(0);
@@ -56,7 +56,7 @@ test('decrease x possition when entity goes left', () => {
   };
   const dt = 20;
   const direction = 'left';
-  const grid = [['empty', 'empty']];
+  const grid = [[{ type: 'empty' }, { type: 'empty' }]];
   moveEntity(entity, dt, direction, grid);
   expect(entity.x).toBe(7);
   expect(entity.y).toBe(0);
@@ -69,7 +69,7 @@ test('increase y possition when the entity goes down', () => {
   };
   const dt = 20;
   const direction = 'down';
-  const grid = [['empty', 'empty']];
+  const grid = [[{ type: 'empty' }, { type: 'empty' }]];
   moveEntity(entity, dt, direction, grid);
   expect(entity.y).toBe(13);
   expect(entity.x).toBe(0);
@@ -82,7 +82,7 @@ test('decrease y possition when the entity goes up', () => {
   };
   const dt = 20;
   const direction = 'up';
-  const grid = [['empty', 'empty']];
+  const grid = [[{ type: 'empty' }, { type: 'empty' }]];
   moveEntity(entity, dt, direction, grid);
   expect(entity.y).toBe(7);
   expect(entity.x).toBe(0);
@@ -101,7 +101,7 @@ test('same total dt results in the same position', () => {
   const dtA = 40;
   const dtB = 10;
   const direction = 'right';
-  const grid = [['empty', 'empty']];
+  const grid = [[{ type: 'empty' }, { type: 'empty' }]];
   moveEntity(entityA, dtA, direction, grid);
   for (let i = 0; i < 4; i++) {
     moveEntity(entityB, dtB, direction, grid);
@@ -116,7 +116,7 @@ test('prevents movement into a wall in the right side', () => {
   };
   const dt = 80;
   const direction = 'right';
-  const grid = [['empty', 'wall']];
+  const grid = [[{ type: 'empty' }, { type: 'wall' }]];
   moveEntity(entity, dt, direction, grid);
   expect(entity.x).toBe(39);
 });
@@ -128,7 +128,7 @@ test('prevents movement into a wall in the left side', () => {
   };
   const dt = 80;
   const direction = 'left';
-  const grid = [['wall', 'empty']];
+  const grid = [[{ type: 'wall' }, { type: 'empty' }]];
   moveEntity(entity, dt, direction, grid);
   expect(entity.x).toBe(40);
 });
@@ -140,7 +140,7 @@ test('prevents movement into a wall below', () => {
   };
   const dt = 80;
   const direction = 'down';
-  const grid = [['empty'], ['wall']];
+  const grid = [[{ type: 'empty' }], [{ type: 'wall' }]];
   moveEntity(entity, dt, direction, grid);
   expect(entity.y).toBe(39);
 });
@@ -152,7 +152,7 @@ test('prevents movement into an upward wall', () => {
   };
   const dt = 80;
   const direction = 'up';
-  const grid = [['wall'], ['empty']];
+  const grid = [[{ type: 'wall' }], [{ type: 'empty' }]];
   moveEntity(entity, dt, direction, grid);
   expect(entity.y).toBe(40);
 });
@@ -169,7 +169,7 @@ test('movement scale with entity.speed', () => {
   };
   const dt = 20;
   const direction = 'right';
-  const grid = [['empty', 'empty']];
+  const grid = [[{ type: 'empty' }, { type: 'empty' }]];
   moveEntity(entityA, dt, direction, grid);
   moveEntity(entityB, dt, direction, grid);
   expect(entityA.x).toBe(3);
