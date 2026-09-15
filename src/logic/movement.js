@@ -3,16 +3,16 @@ export function isWalkable(grid, row, col) {
   if (row < 0 || col < 0 || row >= grid.length || col >= grid[row].length) {
     return false;
   }
-  if (grid[row][col] === 'empty') {
+  if (grid[row][col].type === 'empty') {
     return true;
   }
-  if (grid[row][col] === 'exit') {
+  if (grid[row][col].type === 'exit') {
     return true;
   }
-  if (grid[row][col] === 'wall') {
+  if (grid[row][col].type === 'wall') {
     return false;
   }
-  if (grid[row][col] === 'soft') {
+  if (grid[row][col].type === 'soft') {
     return false;
   }
 }
