@@ -156,3 +156,22 @@ test('prevents movement into an upward wall', () => {
   moveEntity(entity, dt, direction, grid);
   expect(entity.y).toBe(40);
 });
+test('movement scale with entity.speed', () => {
+  const entityA = {
+    x: 0,
+    y: 0,
+    speed: 0.15,
+  };
+  const entityB = {
+    x: 0,
+    y: 0,
+    speed: 0.3,
+  };
+  const dt = 20;
+  const direction = 'right';
+  const grid = [['empty', 'empty']];
+  moveEntity(entityA, dt, direction, grid);
+  moveEntity(entityB, dt, direction, grid);
+  expect(entityA.x).toBe(3);
+  expect(entityB.x).toBe(6);
+});
