@@ -11,3 +11,10 @@ export function createPlayfieldDOM(config) {
   }
   return playfield;
 }
+export function renderGrid(grid) {
+  const playfield = document.querySelector('.playfield');
+  const cell = playfield.querySelector('.playfield__cell');
+  if (grid[0][0].type === 'wall') {
+    cell.classList.add('playfield__cell--wall');
+  }
+}
