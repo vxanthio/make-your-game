@@ -20,6 +20,8 @@ export function renderGrid(grid) {
         cells[row * grid[row].length + col].classList.add('playfield__cell--wall');
       } else if (grid[row][col].type === 'soft') {
         cells[row * grid[row].length + col].classList.add('playfield__cell--soft');
+      } else if (grid[row][col].type === 'exit') {
+        cells[row * grid[row].length + col].classList.add('playfield__cell--exit');
       }
     }
   }
