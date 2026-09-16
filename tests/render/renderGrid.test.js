@@ -19,13 +19,24 @@ test('playfield DOM has the correct coordinates for a cell', () => {
   expect(cell.dataset.col).toBe('4');
 });
 test('renders a wall cell with the wall modifier class', () => {
-  const grid=[[{type:'wall'}]];
-  const playfield=createPlayfieldDOM({
-    rows:1,
-    cols:1,
+  const grid = [[{ type: 'wall' }]];
+  const playfield = createPlayfieldDOM({
+    rows: 1,
+    cols: 1,
   });
   document.body.append(playfield);
-  renderGrid(grid)
- const cell= playfield.querySelector('.playfield__cell')
- expect(cell.classList.contains('playfield__cell--wall')).toBe(true)
+  renderGrid(grid);
+  const cell = playfield.querySelector('.playfield__cell');
+  expect(cell.classList.contains('playfield__cell--wall')).toBe(true);
+});
+test('renders the wall modifier class on the correct cell ina multi-cell grid',()=>{
+  const grid = [[{type:'empty'},{type:'wall'}]];
+  const playfield= createPlayfieldDOM({
+    rows:1,
+    cols:2,
+  });
+document.body.append(playfield);
+renderGrid(grid);
+const cells=playfield.querySelectorAll('.playfield__cell');
+expect(cells[1].classList.contains('playfield__cell--wall')).toBe(true)
 })
