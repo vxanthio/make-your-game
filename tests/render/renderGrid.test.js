@@ -78,17 +78,31 @@ test('removes the old modifier class when a cell becomes empty', () => {
   renderGrid(grid);
   expect(cells[0].classList.contains('playfield__cell--soft')).toBe(false);
 });
-test('replace the soft modifier class with the exit modifier class',()=>{
-const grid=[[{type:'soft'}]];
-const playfield=createPlayfieldDOM({
-  rows:1,
-  cols:1,
+test('replace the soft modifier class with the exit modifier class', () => {
+  const grid = [[{ type: 'soft' }]];
+  const playfield = createPlayfieldDOM({
+    rows: 1,
+    cols: 1,
+  });
+  document.body.append(playfield);
+  renderGrid(grid);
+  const cells = playfield.querySelectorAll('.playfield__cell');
+  grid[0][0].type = 'exit';
+  renderGrid(grid);
+  expect(cells[0].classList.contains('playfield__cell--exit')).toBe(true);
+  expect(cells[0].classList.contains('playfield__cell--soft')).toBe(false);
 });
-document.body.append(playfield);
-renderGrid(grid);
-const cells=playfield.querySelectorAll('.playfield__cell');
-grid[0][0].type='exit';
-renderGrid(grid);
-expect(cells[0].classList.contains('playfield__cell--exit')).toBe(true);
-expect(cells[0].classList.contains('playfield__cell--soft')).toBe(false);
+test('renders the correct modifier class in a multi-row grid', () => {
+  const grid = [
+    [{ type: 'empty' }, { type: 'empty' }],
+    [{ type: 'empty' }, { type: 'wall' }],
+  ];
+  const playfield = createPlayfieldDOM({
+    rows: 2,
+    cols: 2,
+  });
+  document.body.append(playfield);
+  renderGrid(grid);
+  const cells = playfield.querySelectorAll('.playfield__cell');
+  expect(cells[3].classList.contains('playfield__cell--wall')).toBe(true);
 });
