@@ -1,5 +1,8 @@
-import { test, expect } from 'vitest';
+import { test, expect, afterEach} from 'vitest';
 import { createPlayfieldDOM, renderGrid } from '../../src/render/renderGrid.js';
+afterEach(()=>{
+  document.body.innerHTML = '';
+})
 test('create a playfield DOM with the correct number of cells', () => {
   const playfield = createPlayfieldDOM({
     rows: 11,
@@ -29,7 +32,7 @@ test('renders a wall cell with the wall modifier class', () => {
   const cell = playfield.querySelector('.playfield__cell');
   expect(cell.classList.contains('playfield__cell--wall')).toBe(true);
 });
-test('renders the wall modifier class on the correct cell ina multi-cell grid',()=>{
+test('renders the wall modifier class on the correct cell in a multi-cell grid',()=>{
   const grid = [[{type:'empty'},{type:'wall'}]];
   const playfield= createPlayfieldDOM({
     rows:1,
