@@ -13,8 +13,12 @@ export function createPlayfieldDOM(config) {
 }
 export function renderGrid(grid) {
   const playfield = document.querySelector('.playfield');
-  const cell = playfield.querySelector('.playfield__cell');
-  if (grid[0][0].type === 'wall') {
-    cell.classList.add('playfield__cell--wall');
+  const cells = playfield.querySelectorAll('.playfield__cell');
+  for (let row=0;row<grid.length;row++) {
+    for (let col=0;col<grid[row].length;col++) {
+  if (grid[row][col].type === 'wall') {
+    cells[row*grid[row].length+col].classList.add('playfield__cell--wall');
   }
+}
+}
 }
