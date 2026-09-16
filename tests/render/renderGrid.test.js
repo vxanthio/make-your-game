@@ -65,3 +65,16 @@ test('renders an exit cell with the exit modifier class', () => {
   const cells = playfield.querySelectorAll('.playfield__cell');
   expect(cells[1].classList.contains('playfield__cell--exit')).toBe(true);
 });
+test('removes the old modifier class when a cell becomes empty', () => {
+  const grid = [[{ type: 'soft' }]];
+  const playfield = createPlayfieldDOM({
+    rows: 1,
+    cols: 1,
+  });
+  document.body.append(playfield);
+  renderGrid(grid);
+  const cells = playfield.querySelectorAll('.playfield__cell');
+  grid[0][0].type = 'empty';
+  renderGrid(grid);
+  expect(cells[0].classList.contains('playfield__cell--soft')).toBe(false);
+});
