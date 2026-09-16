@@ -16,12 +16,14 @@ export function renderGrid(grid) {
   const cells = playfield.querySelectorAll('.playfield__cell');
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[row].length; col++) {
+      const cell = cells[row * grid[row].length + col];
+      cell.classList.remove('playfield__cell--soft');
       if (grid[row][col].type === 'wall') {
-        cells[row * grid[row].length + col].classList.add('playfield__cell--wall');
+        cell.classList.add('playfield__cell--wall');
       } else if (grid[row][col].type === 'soft') {
-        cells[row * grid[row].length + col].classList.add('playfield__cell--soft');
+        cell.classList.add('playfield__cell--soft');
       } else if (grid[row][col].type === 'exit') {
-        cells[row * grid[row].length + col].classList.add('playfield__cell--exit');
+        cell.classList.add('playfield__cell--exit');
       }
     }
   }
