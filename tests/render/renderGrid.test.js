@@ -1,8 +1,8 @@
-import { test, expect, afterEach} from 'vitest';
+import { test, expect, afterEach } from 'vitest';
 import { createPlayfieldDOM, renderGrid } from '../../src/render/renderGrid.js';
-afterEach(()=>{
+afterEach(() => {
   document.body.innerHTML = '';
-})
+});
 test('create a playfield DOM with the correct number of cells', () => {
   const playfield = createPlayfieldDOM({
     rows: 11,
@@ -32,25 +32,36 @@ test('renders a wall cell with the wall modifier class', () => {
   const cell = playfield.querySelector('.playfield__cell');
   expect(cell.classList.contains('playfield__cell--wall')).toBe(true);
 });
-test('renders the wall modifier class on the correct cell in a multi-cell grid',()=>{
-  const grid = [[{type:'empty'},{type:'wall'}]];
-  const playfield= createPlayfieldDOM({
-    rows:1,
-    cols:2,
+test('renders the wall modifier class on the correct cell in a multi-cell grid', () => {
+  const grid = [[{ type: 'empty' }, { type: 'wall' }]];
+  const playfield = createPlayfieldDOM({
+    rows: 1,
+    cols: 2,
   });
-document.body.append(playfield);
-renderGrid(grid);
-const cells=playfield.querySelectorAll('.playfield__cell');
-expect(cells[1].classList.contains('playfield__cell--wall')).toBe(true)
+  document.body.append(playfield);
+  renderGrid(grid);
+  const cells = playfield.querySelectorAll('.playfield__cell');
+  expect(cells[1].classList.contains('playfield__cell--wall')).toBe(true);
 });
-test('render a soft cell with the soft modifier class',()=> {
-const grid =[[{type:'empty'},{type:'soft'}]]
-const playfield=createPlayfieldDOM({
-  rows:1,
-  cols:2,
+test('render a soft cell with the soft modifier class', () => {
+  const grid = [[{ type: 'empty' }, { type: 'soft' }]];
+  const playfield = createPlayfieldDOM({
+    rows: 1,
+    cols: 2,
+  });
+  document.body.append(playfield);
+  renderGrid(grid);
+  const cells = playfield.querySelectorAll('.playfield__cell');
+  expect(cells[1].classList.contains('playfield__cell--soft')).toBe(true);
 });
-document.body.append(playfield);
-renderGrid(grid)
-const cells = playfield.querySelectorAll('.playfield__cell');
-expect(cells[1].classList.contains('playfield__cell--soft')).toBe(true)
+test('renders an exit cell with the exit modifier class', () => {
+  const grid = [[{ type: 'empty' }, { type: 'exit' }]];
+  const playfield = createPlayfieldDOM({
+    rows: 1,
+    cols: 2,
+  });
+  document.body.append(playfield);
+  renderGrid(grid);
+  const cells = playfield.querySelectorAll('.playfield__cell');
+  expect(cells[1].classList.contains('playfield__cell--exit')).toBe(true);
 });
