@@ -42,4 +42,15 @@ document.body.append(playfield);
 renderGrid(grid);
 const cells=playfield.querySelectorAll('.playfield__cell');
 expect(cells[1].classList.contains('playfield__cell--wall')).toBe(true)
-})
+});
+test('render a soft cell with the soft modifier class',()=> {
+const grid =[[{type:'empty'},{type:'soft'}]]
+const playfield=createPlayfieldDOM({
+  rows:1,
+  cols:2,
+});
+document.body.append(playfield);
+renderGrid(grid)
+const cells = playfield.querySelectorAll('.playfield__cell');
+expect(cells[1].classList.contains('playfield__cell--soft')).toBe(true)
+});
