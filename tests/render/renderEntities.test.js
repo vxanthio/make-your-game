@@ -27,3 +27,27 @@ test('positions the player without using top or left', () => {
   expect(playerElement.style.top).toBe('');
   expect(playerElement.style.left).toBe('');
 });
+test('positions the enemy using transform from state coordinates', () => {
+  const state = {
+    enemies: [
+      {
+        id: 'enemy-1',
+        x: 160,
+        y: 200,
+      },
+    ],
+    player: {
+      x: 0,
+      y: 0,
+    },
+  };
+  const playerElement = document.createElement('div');
+  playerElement.classList.add('sprite--player');
+  document.body.append(playerElement);
+  const enemyElement = document.createElement('div');
+  enemyElement.classList.add('sprite--enemy');
+  enemyElement.dataset.entityId = 'enemy-1';
+  document.body.append(enemyElement);
+  renderEntities(state);
+  expect(enemyElement.style.transform).toBe('translate(160px, 200px)');
+});
