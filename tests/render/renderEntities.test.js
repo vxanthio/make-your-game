@@ -90,3 +90,28 @@ test('positions the correct enemy by entity id', () => {
   expect(enemyElement1.style.transform).toBe('translate(60px, 100px)');
   expect(enemyElement2.style.transform).toBe('translate(160px, 200px)');
 });
+test('positions a bomb using grid coordinates', () => {
+  const state = {
+    bombs: [
+      {
+        id: 'bomb-1',
+        col: 3,
+        row: 2,
+      },
+    ],
+    enemies: [],
+    player: {
+      x: 0,
+      y: 0,
+    },
+  };
+  const playerElement = document.createElement('div');
+  playerElement.classList.add('sprite--player');
+  document.body.append(playerElement);
+  const bombElement = document.createElement('div');
+  bombElement.classList.add('sprite--bomb');
+  bombElement.dataset.entityId = 'bomb-1';
+  document.body.append(bombElement);
+  renderEntities(state);
+  expect(bombElement.style.transform).toBe('translate(120px, 80px)');
+});
