@@ -6,6 +6,7 @@ test('positions the player using transform from state coordinates', () => {
       x: 80,
       y: 120,
     },
+    enemies: [],
   };
   const playerElement = document.createElement('div');
   playerElement.classList.add('sprite--player');
@@ -19,6 +20,7 @@ test('positions the player without using top or left', () => {
       x: 80,
       y: 120,
     },
+    enemies: [],
   };
   const playerElement = document.createElement('div');
   playerElement.classList.add('sprite--player');
