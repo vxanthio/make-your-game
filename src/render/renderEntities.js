@@ -1,1 +1,4 @@
-// Owner: Vasiliki. See ROADMAP.md §4.3 for renderEntities.
+export function renderEntities(state) {
+  const player = document.querySelector('.sprite--player');
+  player.style.transform = `translate(${state.player.x}px, ${state.player.y}px)`;
+}
