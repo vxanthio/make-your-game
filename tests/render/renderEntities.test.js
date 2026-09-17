@@ -119,3 +119,38 @@ test('positions a bomb using grid coordinates', () => {
   renderEntities(state);
   expect(bombElement.style.transform).toBe('translate(120px, 80px)');
 });
+test('positions the correct bomb by entity id', () => {
+  const state = {
+    bombs: [
+      {
+        id: 'bomb-1',
+        col: 3,
+        row: 2,
+      },
+      {
+        id: 'bomb-2',
+        col: 5,
+        row: 4,
+      },
+    ],
+    enemies: [],
+    player: {
+      x: 0,
+      y: 0,
+    },
+  };
+  const bombElement1 = document.createElement('div');
+  bombElement1.classList.add('sprite--bomb');
+  bombElement1.dataset.entityId = 'bomb-1';
+  document.body.append(bombElement1);
+  const bombElement2 = document.createElement('div');
+  bombElement2.classList.add('sprite--bomb');
+  bombElement2.dataset.entityId = 'bomb-2';
+  document.body.append(bombElement2);
+  const playerElement = document.createElement('div');
+  playerElement.classList.add('sprite--player');
+  document.body.append(playerElement);
+  renderEntities(state);
+  expect(bombElement1.style.transform).toBe('translate(120px, 80px)');
+  expect(bombElement2.style.transform).toBe('translate(200px, 160px)');
+});
