@@ -11,6 +11,7 @@ test('positions the player using transform from state coordinates', () => {
     },
     enemies: [],
     bombs: [],
+    explosions:[],
   };
   const playerElement = document.createElement('div');
   playerElement.classList.add('sprite--player');
@@ -26,6 +27,7 @@ test('positions the player without using top or left', () => {
     },
     enemies: [],
     bombs: [],
+    explosions:[],
   };
   const playerElement = document.createElement('div');
   playerElement.classList.add('sprite--player');
@@ -48,6 +50,7 @@ test('positions the enemy using transform from state coordinates', () => {
       y: 0,
     },
     bombs: [],
+    explosions:[],
   };
   const playerElement = document.createElement('div');
   playerElement.classList.add('sprite--player');
@@ -78,6 +81,7 @@ test('positions the correct enemy by entity id', () => {
       y: 0,
     },
     bombs: [],
+    explosions:[],
   };
   const playerElement = document.createElement('div');
   playerElement.classList.add('sprite--player');
@@ -104,6 +108,7 @@ test('positions a bomb using grid coordinates', () => {
       },
     ],
     enemies: [],
+    explosions:[],
     player: {
       x: 0,
       y: 0,
@@ -134,6 +139,7 @@ test('positions the correct bomb by entity id', () => {
       },
     ],
     enemies: [],
+    explosions:[],
     player: {
       x: 0,
       y: 0,
