@@ -154,3 +154,44 @@ test('positions the correct bomb by entity id', () => {
   expect(bombElement1.style.transform).toBe('translate(120px, 80px)');
   expect(bombElement2.style.transform).toBe('translate(200px, 160px)');
 });
+test('positions explosion cells using grid coordinates', () => {
+  const state = {
+    player: {
+      x: 0,
+      y: 0,
+    },
+    enemies: [],
+    bombs: [],
+    explosions: [
+      {
+        id: 'explosion-1',
+        cells: [
+          {
+            row: 2,
+            col: 3,
+          },
+          {
+            row: 2,
+            col: 4,
+          },
+        ],
+      },
+    ],
+  };
+  const playerElement = document.createElement('div');
+  playerElement.classList.add('sprite--player');
+  document.body.append(playerElement);
+  const explosionElement1 = document.createElement('div');
+  explosionElement1.classList.add('sprite--explosion');
+  const explosionElement2 = document.createElement('div');
+  explosionElement2.classList.add('sprite--explosion');
+  explosionElement1.dataset.entityId = 'explosion-1';
+  explosionElement2.dataset.entityId = 'explosion-1';
+  explosionElement1.dataset.cellIndex = '0';
+  explosionElement2.dataset.cellIndex = '1';
+  document.body.append(explosionElement1);
+  document.body.append(explosionElement2);
+  renderEntities(state);
+  expect(explosionElement1.style.transform).toBe('translate(120px, 80px)');
+  expect(explosionElement2.style.transform).toBe('translate(160px, 80px)');
+});
