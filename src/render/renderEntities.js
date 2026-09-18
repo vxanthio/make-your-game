@@ -12,8 +12,10 @@ export function renderEntities(state) {
   }
   for (const explosion of state.explosions) {
     for (const [index, cell] of explosion.cells.entries()) {
-  const explosionElement= document.querySelector(`.sprite--explosion[data-entity-id='${explosion.id}'][data-cell-index='${index}']`);
-  explosionElement.style.transform=`translate(${cell.col*TILE_SIZE_PX}px, ${cell.row*TILE_SIZE_PX}px)`;
+      const explosionElement = document.querySelector(
+        `.sprite--explosion[data-entity-id='${explosion.id}'][data-cell-index='${index}']`
+      );
+      explosionElement.style.transform = `translate(${cell.col * TILE_SIZE_PX}px, ${cell.row * TILE_SIZE_PX}px)`;
+    }
   }
-}
 }
