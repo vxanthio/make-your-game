@@ -11,7 +11,7 @@ test('positions the player using transform from state coordinates', () => {
     },
     enemies: [],
     bombs: [],
-    explosions:[],
+    explosions: [],
   };
   const playerElement = document.createElement('div');
   playerElement.classList.add('sprite--player');
@@ -27,7 +27,7 @@ test('positions the player without using top or left', () => {
     },
     enemies: [],
     bombs: [],
-    explosions:[],
+    explosions: [],
   };
   const playerElement = document.createElement('div');
   playerElement.classList.add('sprite--player');
@@ -50,7 +50,7 @@ test('positions the enemy using transform from state coordinates', () => {
       y: 0,
     },
     bombs: [],
-    explosions:[],
+    explosions: [],
   };
   const playerElement = document.createElement('div');
   playerElement.classList.add('sprite--player');
@@ -81,7 +81,7 @@ test('positions the correct enemy by entity id', () => {
       y: 0,
     },
     bombs: [],
-    explosions:[],
+    explosions: [],
   };
   const playerElement = document.createElement('div');
   playerElement.classList.add('sprite--player');
@@ -108,7 +108,7 @@ test('positions a bomb using grid coordinates', () => {
       },
     ],
     enemies: [],
-    explosions:[],
+    explosions: [],
     player: {
       x: 0,
       y: 0,
@@ -139,7 +139,7 @@ test('positions the correct bomb by entity id', () => {
       },
     ],
     enemies: [],
-    explosions:[],
+    explosions: [],
     player: {
       x: 0,
       y: 0,
@@ -200,4 +200,70 @@ test('positions explosion cells using grid coordinates', () => {
   renderEntities(state);
   expect(explosionElement1.style.transform).toBe('translate(120px, 80px)');
   expect(explosionElement2.style.transform).toBe('translate(160px, 80px)');
+});
+test('positions the correct explosion cells by entity id', () => {
+  const state = {
+    explosions: [
+      {
+        id: 'explosion-1',
+        cells: [
+          {
+            row: 2,
+            col: 3,
+          },
+          {
+            row: 2,
+            col: 4,
+          },
+        ],
+      },
+      {
+        id: 'explosion-2',
+        cells: [
+          {
+            row: 5,
+            col: 6,
+          },
+          {
+            row: 5,
+            col: 7,
+          },
+        ],
+      },
+    ],
+    player: {
+      x: 0,
+      y: 0,
+    },
+    enemies: [],
+    bombs: [],
+  };
+  const playerElement = document.createElement('div');
+  playerElement.classList.add('sprite--player');
+  document.body.append(playerElement);
+  const explosionElement1 = document.createElement('div');
+  explosionElement1.classList.add('sprite--explosion');
+  explosionElement1.dataset.entityId = 'explosion-1';
+  explosionElement1.dataset.cellIndex = '0';
+  const explosionElement2 = document.createElement('div');
+  explosionElement2.classList.add('sprite--explosion');
+  explosionElement2.dataset.entityId = 'explosion-1';
+  explosionElement2.dataset.cellIndex = '1';
+  document.body.append(explosionElement1);
+  document.body.append(explosionElement2);
+  const explosionElement3 = document.createElement('div');
+  explosionElement3.classList.add('sprite--explosion');
+  explosionElement3.dataset.entityId = 'explosion-2';
+  explosionElement3.dataset.cellIndex = '0';
+  const explosionElement4 = document.createElement('div');
+  explosionElement4.classList.add('sprite--explosion');
+  explosionElement4.dataset.entityId = 'explosion-2';
+  explosionElement4.dataset.cellIndex = '1';
+  document.body.append(explosionElement3);
+  document.body.append(explosionElement4);
+  renderEntities(state);
+  expect(explosionElement1.style.transform).toBe('translate(120px, 80px)');
+  expect(explosionElement2.style.transform).toBe('translate(160px, 80px)');
+  expect(explosionElement3.style.transform).toBe('translate(240px, 200px)');
+  expect(explosionElement4.style.transform).toBe('translate(280px, 200px)');
 });
